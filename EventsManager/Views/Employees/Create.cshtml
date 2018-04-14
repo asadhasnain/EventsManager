@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DateOfBirth, "{0:dMM/dd/yyyy}", new { @id = "datepickerDoB", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfJoining, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateOfJoining, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DateOfJoining, "{0:dMM/dd/yyyy}", new { @id = "datepickerDoJ", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.DateOfJoining, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfResignation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateOfResignation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DateOfResignation, "{0:dMM/dd/yyyy}", new  { @id = "datepickerDoR", @class = "form-control",  placeholder = "MM/dd/yyyy"})
                 @Html.ValidationMessageFor(model => model.DateOfResignation, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,5 +68,21 @@
 </div>
 
 @section Scripts {
+
+    @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+
+        $("#datepickerDoB,#datepickerDoJ,#datepickerDoR").each(function () {
+            $(this).datepicker(
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:' + new Date().getFullYear()
+                }
+            ); //Initialise any date pickers
+        });
+    </script>
 }

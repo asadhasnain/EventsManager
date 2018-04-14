@@ -43,7 +43,7 @@ namespace EventsManagerModels
         [Required (ErrorMessage = "Date of Joining is required")]
         [DataType (DataType.Date)]
         [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
-        public System.DateTime DateOfJoining { get; set; }
+        public System.DateTime? DateOfJoining { get; set; }
 
         [DisplayName ("Date of Resignation")]
         [DataType (DataType.Date)]
