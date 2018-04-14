@@ -18,7 +18,7 @@ namespace EventsManager
                 url: "{controller}/{action}/{id}",
                 defaults: new
                     {
-                    controller = "Home",
+                    controller = "Events",
                     action = "Index",
                     id = UrlParameter.Optional
                     }
