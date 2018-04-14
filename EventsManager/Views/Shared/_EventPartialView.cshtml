@@ -1,0 +1,25 @@
+﻿@model EventsManagerModels.Event
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <hr />
+    <dl>
+        <dd>
+            @Html.DisplayNameFor(model => model.Description): 
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.Schedule): 
+            @Html.DisplayFor(model => model.Schedule)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.Committee.Title): 
+            @Html.DisplayFor(model => model.Committee.Title)
+        </dd>
+    </dl>
+     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+     @Html.ActionLink("Details", "Details", new { id= Model.Id }) |
+     @Html.ActionLink("Delete", "Delete", new { id= Model.Id }) 
+</div>
+
+

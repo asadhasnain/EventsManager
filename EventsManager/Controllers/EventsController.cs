@@ -21,6 +21,13 @@ namespace EventsManager.Controllers
             return View(db.Events.ToList());
         }
 
+        // GET: Events
+        public ActionResult ListView()
+            {
+            //var events = db.Events.Include(c => c.Committee);
+            return View (db.Events.ToList ());
+            }
+        [Authorize]
         // GET: Events/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,6 +43,7 @@ namespace EventsManager.Controllers
             return View(@event);
         }
 
+        [Authorize]
         // GET: Events/Create
         public ActionResult Create()
         {
@@ -47,6 +55,7 @@ namespace EventsManager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Description,Schedule,CommitteeID")] Event @event)
         {
@@ -62,6 +71,7 @@ namespace EventsManager.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +91,7 @@ namespace EventsManager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Description,Schedule,CommitteeID")] Event @event)
         {
@@ -94,6 +105,7 @@ namespace EventsManager.Controllers
             return View(@event);
         }
 
+        [Authorize]
         // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -112,6 +124,7 @@ namespace EventsManager.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);

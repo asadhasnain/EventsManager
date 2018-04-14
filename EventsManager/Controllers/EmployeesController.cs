@@ -10,6 +10,7 @@ using EventsManagerModels;
 
 namespace EventsManager.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private DomainModels db = new DomainModels();
