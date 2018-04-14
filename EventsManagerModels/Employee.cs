@@ -11,7 +11,9 @@ namespace EventsManagerModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +23,31 @@ namespace EventsManagerModels
         }
     
         public int Id { get; set; }
+
+        [Required (ErrorMessage = "Colleague name is required")]
+        [StringLength (250)]
         public string Name { get; set; }
+
+        [DisplayName ("Email Id")]
+        [Required (ErrorMessage = "Email is required")]
+        [EmailAddress]
         public string Email { get; set; }
+
+        [DisplayName("Date of Birth")]
+        [Required (ErrorMessage = "Date of Birth is required")]
+        [DataType (DataType.Date)]
+        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime DateOfBirth { get; set; }
+
+        [DisplayName ("Date of Joining")]
+        [Required (ErrorMessage = "Date of Joining is required")]
+        [DataType (DataType.Date)]
+        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime DateOfJoining { get; set; }
+
+        [DisplayName ("Date of Resignation")]
+        [DataType (DataType.Date)]
+        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> DateOfResignation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

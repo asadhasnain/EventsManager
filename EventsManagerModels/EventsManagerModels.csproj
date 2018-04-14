@@ -62,11 +62,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DomainModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DomainModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="DomainModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
