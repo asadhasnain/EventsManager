@@ -373,11 +373,6 @@
     <Content Include="Views\Committees\Details.cshtml" />
     <Content Include="Views\Committees\Edit.cshtml" />
     <Content Include="Views\Committees\Index.cshtml" />
-    <Content Include="Views\Members\Create.cshtml" />
-    <Content Include="Views\Members\Delete.cshtml" />
-    <Content Include="Views\Members\Details.cshtml" />
-    <Content Include="Views\Members\Edit.cshtml" />
-    <Content Include="Views\Members\Index.cshtml" />
     <Content Include="Views\Budgets\Create.cshtml" />
     <Content Include="Views\Budgets\Delete.cshtml" />
     <Content Include="Views\Budgets\Details.cshtml" />
@@ -388,11 +383,6 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Expenses\Create.cshtml" />
-    <Content Include="Views\Expenses\Delete.cshtml" />
-    <Content Include="Views\Expenses\Details.cshtml" />
-    <Content Include="Views\Expenses\Edit.cshtml" />
-    <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
@@ -400,6 +390,16 @@
     <Content Include="Views\Employees\ListView.cshtml" />
     <Content Include="Views\Shared\_EmployeePartialView.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Members\Create.cshtml" />
+    <Content Include="Views\Members\Delete.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Expenses\Create.cshtml" />
+    <Content Include="Views\Expenses\Delete.cshtml" />
+    <Content Include="Views\Expenses\Details.cshtml" />
+    <Content Include="Views\Expenses\Edit.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

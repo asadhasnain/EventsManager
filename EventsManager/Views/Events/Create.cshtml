@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Schedule, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Schedule, new { @id = "datepicker", @class = "form-control", placeholder = "Event Date" })
+                @Html.TextBoxFor(model => model.Schedule, "{0:dMM/dd/yyyy}", new { @id = "datepickerEvent", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.Schedule, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,15 +60,20 @@
 </div>
 
 @section Scripts {
-    @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/themes/base/css")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryui")
 
-    <script type="text/javascript">
-        alert("asdasdas");
-        $(function () { // will trigger when the document is ready
-            $('#datepicker').datetimepicker({
-                dateFormat: 'dd-mm-yy', timeFormat: 'hh:mm'
-            }); //Initialise any date pickers
+<script type="text/javascript">
+
+        $("#datepickerEvent").each(function () {
+            $(this).datepicker(
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '2018:' + new Date().getFullYear()
+                }
+            ); //Initialise any date pickers
         });
-    </script>
+</script>
 }
