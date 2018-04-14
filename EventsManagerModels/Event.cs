@@ -11,7 +11,9 @@ namespace EventsManagerModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Event
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +23,22 @@ namespace EventsManagerModels
         }
     
         public int Id { get; set; }
+
+        [Required (ErrorMessage = "Event title required")]
+        [StringLength (250)]
         public string Title { get; set; }
+
+        [Required (ErrorMessage = "Event description is required")]
+        [StringLength (500)]
         public string Description { get; set; }
+
+        [DisplayName ("Event Date")]
+        [Required (ErrorMessage = "Date of Event is required")]
+        [DataType (DataType.Date)]
+        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime Schedule { get; set; }
+
+        [DisplayName ("Committee")]
         public int CommitteeID { get; set; }
     
         public virtual Committee Committee { get; set; }
