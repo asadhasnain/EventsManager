@@ -1,0 +1,30 @@
+﻿@model EventsManagerModels.Employee
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <dl>
+        <dd>
+            @Html.DisplayNameFor(model => model.Email): 
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.DateOfBirth): 
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.DateOfJoining): 
+            @Html.DisplayFor(model => model.DateOfJoining)
+        </dd>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.DateOfResignation):
+            @Html.DisplayFor(model => model.DateOfResignation)
+        </dd>
+
+    </dl>
+     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+     @Html.ActionLink("Details", "Details", new { id= Model.Id }) |
+     @Html.ActionLink("Delete", "Delete", new { id= Model.Id }) 
+</div>
+

@@ -15,6 +15,12 @@ namespace EventsManager.Controllers
         private DomainModels db = new DomainModels();
 
         // GET: Employees
+        public ActionResult ListView()
+            {
+            return View (db.Employees.ToList ());
+            }
+
+        // GET: Employees
         public ActionResult Index()
         {
             return View(db.Employees.ToList());

@@ -42,12 +42,12 @@ namespace EventsManagerModels
         [DisplayName ("Date of Joining")]
         [Required (ErrorMessage = "Date of Joining is required")]
         [DataType (DataType.Date)]
-        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime? DateOfJoining { get; set; }
 
         [DisplayName ("Date of Resignation")]
         [DataType (DataType.Date)]
-        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat (ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> DateOfResignation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
