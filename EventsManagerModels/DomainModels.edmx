@@ -51,8 +51,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Amount" Type="real" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="EventID" Type="int" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FounderAwards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -71,6 +80,18 @@
             </Principal>
             <Dependent Role="Budget">
               <PropertyRef Name="CommitteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_FounderAwards">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="FounderAwards" Type="Self.FounderAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FounderAwards">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -95,6 +116,18 @@
             </Principal>
             <Dependent Role="Expense">
               <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expense_ToMember">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expense">
+              <PropertyRef Name="MemberID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -128,10 +161,15 @@
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expense" EntityType="Self.Expense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FounderAwards" EntityType="Self.FounderAwards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Budget_ToCommittee" Association="Self.FK_Budget_ToCommittee">
             <End Role="Committee" EntitySet="Committee" />
             <End Role="Budget" EntitySet="Budget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_FounderAwards" Association="Self.FK_Employee_FounderAwards">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="FounderAwards" EntitySet="FounderAwards" />
           </AssociationSet>
           <AssociationSet Name="FK_Evemt_ToCommittee" Association="Self.FK_Evemt_ToCommittee">
             <End Role="Committee" EntitySet="Committee" />
@@ -139,6 +177,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Expense_ToEvent" Association="Self.FK_Expense_ToEvent">
             <End Role="Event" EntitySet="Event" />
+            <End Role="Expense" EntitySet="Expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expense_ToMember" Association="Self.FK_Expense_ToMember">
+            <End Role="Member" EntitySet="Member" />
             <End Role="Expense" EntitySet="Expense" />
           </AssociationSet>
           <AssociationSet Name="FK_Member_ToCommittee" Association="Self.FK_Member_ToCommittee">
@@ -187,6 +229,7 @@
           <Property Name="DateOfJoining" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateOfResignation" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Members" Relationship="Self.FK_Member_ToEmployee" FromRole="Employee" ToRole="Member" />
+          <NavigationProperty Name="FounderAwards" Relationship="DomainModels.FK_Employee_FounderAwards" FromRole="Employee" ToRole="FounderAward" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -210,6 +253,8 @@
           <Property Name="EventID" Type="Int32" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Expense_ToEvent" FromRole="Expense" ToRole="Event" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="DomainModels.FK_Expense_ToMember" FromRole="Expense" ToRole="Member" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -220,6 +265,7 @@
           <Property Name="CommitteeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Committee" Relationship="Self.FK_Member_ToCommittee" FromRole="Member" ToRole="Committee" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Member_ToEmployee" FromRole="Member" ToRole="Employee" />
+          <NavigationProperty Name="Expenses" Relationship="DomainModels.FK_Expense_ToMember" FromRole="Member" ToRole="Expense" />
         </EntityType>
         <Association Name="FK_Budget_ToCommittee">
           <End Role="Committee" Type="Self.Committee" Multiplicity="1" />
@@ -308,7 +354,49 @@
             <End Role="Event" EntitySet="Events" />
             <End Role="Expense" EntitySet="Expenses" />
           </AssociationSet>
+          <EntitySet Name="FounderAwards" EntityType="DomainModels.FounderAward" />
+          <AssociationSet Name="FK_Employee_FounderAwards" Association="DomainModels.FK_Employee_FounderAwards">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="FounderAward" EntitySet="FounderAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expense_ToMember" Association="DomainModels.FK_Expense_ToMember">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Expense" EntitySet="Expenses" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FounderAward">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="DomainModels.FK_Employee_FounderAwards" FromRole="FounderAward" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Employee_FounderAwards">
+          <End Type="DomainModels.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DomainModels.FounderAward" Role="FounderAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FounderAward">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expense_ToMember">
+          <End Type="DomainModels.Member" Role="Member" Multiplicity="1" />
+          <End Type="DomainModels.Expense" Role="Expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expense">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -361,6 +449,7 @@
           <EntitySetMapping Name="Expenses">
             <EntityTypeMapping TypeName="DomainModels.Expense">
               <MappingFragment StoreEntitySet="Expense">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -375,6 +464,15 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="CommitteeID" ColumnName="CommitteeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FounderAwards">
+            <EntityTypeMapping TypeName="DomainModels.FounderAward">
+              <MappingFragment StoreEntitySet="FounderAwards">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

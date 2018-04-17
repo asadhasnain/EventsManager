@@ -31,5 +31,6 @@ namespace EventsManagerModels
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<FounderAward> FounderAwards { get; set; }
     }
 }

@@ -16,6 +16,9 @@
         <AssociationConnector Association="DomainModels.FK_Member_ToCommittee" ManuallyRouted="false" />
         <AssociationConnector Association="DomainModels.FK_Member_ToEmployee" ManuallyRouted="false" />
         <AssociationConnector Association="DomainModels.FK_Expense_ToEvent" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DomainModels.FounderAward" Width="1.5" PointX="6" PointY="1.125" />
+        <AssociationConnector Association="DomainModels.FK_Employee_FounderAwards" />
+        <AssociationConnector Association="DomainModels.FK_Expense_ToMember" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

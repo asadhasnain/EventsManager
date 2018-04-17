@@ -18,6 +18,7 @@ namespace EventsManagerModels
         public Employee()
         {
             this.Members = new HashSet<Member>();
+            this.FounderAwards = new HashSet<FounderAward>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace EventsManagerModels
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FounderAward> FounderAwards { get; set; }
     }
 }

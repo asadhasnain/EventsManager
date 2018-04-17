@@ -201,6 +201,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
+    <Compile Include="Controllers\FounderAwardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -402,6 +403,11 @@
     <Content Include="Views\Expenses\Details.cshtml" />
     <Content Include="Views\Expenses\Edit.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\FounderAwards\Create.cshtml" />
+    <Content Include="Views\FounderAwards\Delete.cshtml" />
+    <Content Include="Views\FounderAwards\Details.cshtml" />
+    <Content Include="Views\FounderAwards\Edit.cshtml" />
+    <Content Include="Views\FounderAwards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
