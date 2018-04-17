@@ -64,3 +64,12 @@ CREATE TABLE [dbo].[Marriage] (
 	CONSTANT [PK_Marriage] PRIMARY KEY CLUSTERED([Id] ASC),
 	CONSTRAINT [FK_Marriage_ToEmployee] FOREIGN KEY ([EmployeeID]) REFERENCES [dbo].[Employee] ([Id])
 	)
+	
+	CREATE TABLE [dbo].[FounderAwards]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY (1, 1), 
+    [EmployeeId] INT NOT NULL, 
+    [Date] DATE NOT NULL, 
+    CONSTRAINT [FK_Table_ToTable] FOREIGN KEY (EmployeeId) REFERENCES [Employee]([Id])
+)
+
