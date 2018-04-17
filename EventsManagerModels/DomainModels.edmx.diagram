@@ -16,7 +16,6 @@
         <AssociationConnector Association="DomainModels.FK_Member_ToCommittee" ManuallyRouted="false" />
         <AssociationConnector Association="DomainModels.FK_Member_ToEmployee" ManuallyRouted="false" />
         <AssociationConnector Association="DomainModels.FK_Expense_ToEvent" ManuallyRouted="false" />
-        <AssociationConnector Association="DomainModels.FK_Expense_ToMember" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

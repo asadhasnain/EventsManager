@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DomainModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DomainModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Budget">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,7 +13,7 @@
           <Property Name="CommitteeID" Type="int" Nullable="false" />
           <Property Name="Amount" Type="real" Nullable="false" />
           <Property Name="Year" Type="nchar" MaxLength="4" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="Committee">
           <Key>
@@ -30,9 +30,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="DateOfJoining" Type="date" Nullable="false" />
-          <Property Name="DateOfResignation" Type="date" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="DateOfJoining" Type="datetime" Nullable="false" />
+          <Property Name="DateOfResignation" Type="datetime" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -51,7 +51,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Amount" Type="real" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
-          <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="EventID" Type="int" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -99,18 +98,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Expense_ToMember">
-          <End Role="Member" Type="Self.Member" Multiplicity="1" />
-          <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Expense">
-              <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Member_ToCommittee">
           <End Role="Committee" Type="Self.Committee" Multiplicity="1" />
           <End Role="Member" Type="Self.Member" Multiplicity="*" />
@@ -154,10 +141,6 @@
             <End Role="Event" EntitySet="Event" />
             <End Role="Expense" EntitySet="Expense" />
           </AssociationSet>
-          <AssociationSet Name="FK_Expense_ToMember" Association="Self.FK_Expense_ToMember">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Expense" EntitySet="Expense" />
-          </AssociationSet>
           <AssociationSet Name="FK_Member_ToCommittee" Association="Self.FK_Member_ToCommittee">
             <End Role="Committee" EntitySet="Committee" />
             <End Role="Member" EntitySet="Member" />
@@ -167,8 +150,7 @@
             <End Role="Member" EntitySet="Member" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DomainModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -180,7 +162,7 @@
           <Property Name="CommitteeID" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Single" Nullable="false" />
           <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Committee" Relationship="Self.FK_Budget_ToCommittee" FromRole="Budget" ToRole="Committee" />
         </EntityType>
         <EntityType Name="Committee">
@@ -201,9 +183,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DateOfJoining" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DateOfResignation" Type="DateTime" Precision="0" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfJoining" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfResignation" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Members" Relationship="Self.FK_Member_ToEmployee" FromRole="Employee" ToRole="Member" />
         </EntityType>
         <EntityType Name="Event">
@@ -225,11 +207,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Amount" Type="Single" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="EventID" Type="Int32" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Expense_ToEvent" FromRole="Expense" ToRole="Event" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_Expense_ToMember" FromRole="Expense" ToRole="Member" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -240,7 +220,6 @@
           <Property Name="CommitteeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Committee" Relationship="Self.FK_Member_ToCommittee" FromRole="Member" ToRole="Committee" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Member_ToEmployee" FromRole="Member" ToRole="Employee" />
-          <NavigationProperty Name="Expenses" Relationship="Self.FK_Expense_ToMember" FromRole="Member" ToRole="Expense" />
         </EntityType>
         <Association Name="FK_Budget_ToCommittee">
           <End Role="Committee" Type="Self.Committee" Multiplicity="1" />
@@ -302,18 +281,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Expense_ToMember">
-          <End Role="Member" Type="Self.Member" Multiplicity="1" />
-          <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Expense">
-              <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BeEventsConnectionString" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Budgets" EntityType="Self.Budget" />
           <EntitySet Name="Committees" EntityType="Self.Committee" />
@@ -339,10 +306,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Expense_ToEvent" Association="Self.FK_Expense_ToEvent">
             <End Role="Event" EntitySet="Events" />
-            <End Role="Expense" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Expense_ToMember" Association="Self.FK_Expense_ToMember">
-            <End Role="Member" EntitySet="Members" />
             <End Role="Expense" EntitySet="Expenses" />
           </AssociationSet>
         </EntityContainer>
@@ -401,7 +364,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
               </MappingFragment>

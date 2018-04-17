@@ -10,7 +10,6 @@ using EventsManagerModels;
 
 namespace EventsManager.Controllers
 {
-    [Authorize]
     public class ExpensesController : Controller
     {
         private DomainModels db = new DomainModels();
@@ -18,7 +17,7 @@ namespace EventsManager.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = db.Expenses.Include(e => e.Event).Include(e => e.Member);
+            var expenses = db.Expenses.Include(e => e.Event);
             return View(expenses.ToList());
         }
 
@@ -41,7 +40,6 @@ namespace EventsManager.Controllers
         public ActionResult Create()
         {
             ViewBag.EventID = new SelectList(db.Events, "Id", "Title");
-            ViewBag.MemberID = new SelectList(db.Members, "Id", "Id");
             return View();
         }
 
@@ -50,7 +48,7 @@ namespace EventsManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Amount,Description,MemberID,EventID,DateTime")] Expense expense)
+        public ActionResult Create([Bind(Include = "Id,Amount,Description,EventID,DateTime")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +58,6 @@ namespace EventsManager.Controllers
             }
 
             ViewBag.EventID = new SelectList(db.Events, "Id", "Title", expense.EventID);
-            ViewBag.MemberID = new SelectList(db.Members, "Id", "Id", expense.MemberID);
             return View(expense);
         }
 
@@ -77,7 +74,6 @@ namespace EventsManager.Controllers
                 return HttpNotFound();
             }
             ViewBag.EventID = new SelectList(db.Events, "Id", "Title", expense.EventID);
-            ViewBag.MemberID = new SelectList(db.Members, "Id", "Id", expense.MemberID);
             return View(expense);
         }
 
@@ -86,7 +82,7 @@ namespace EventsManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Amount,Description,MemberID,EventID,DateTime")] Expense expense)
+        public ActionResult Edit([Bind(Include = "Id,Amount,Description,EventID,DateTime")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +91,6 @@ namespace EventsManager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.EventID = new SelectList(db.Events, "Id", "Title", expense.EventID);
-            ViewBag.MemberID = new SelectList(db.Members, "Id", "Id", expense.MemberID);
             return View(expense);
         }
 
