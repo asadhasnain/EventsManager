@@ -12,13 +12,13 @@ namespace EventsManagerModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Member
+    public partial class BabyBirth
     {
         public int Id { get; set; }
+        public Gender Gender { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
         public int EmployeeID { get; set; }
-        public int CommitteeID { get; set; }
     
-        public virtual Committee Committee { get; set; }
         public virtual Employee Employee { get; set; }
     }
 }

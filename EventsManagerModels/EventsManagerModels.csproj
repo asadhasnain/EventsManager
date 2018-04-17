@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BabyBirth.cs">
+      <DependentUpon>DomainModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Budget.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
@@ -82,6 +85,9 @@
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
     <Compile Include="FounderAward.cs">
+      <DependentUpon>DomainModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">

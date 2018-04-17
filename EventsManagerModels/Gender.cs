@@ -10,15 +10,10 @@
 namespace EventsManagerModels
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Member
+    public enum Gender : int
     {
-        public int Id { get; set; }
-        public int EmployeeID { get; set; }
-        public int CommitteeID { get; set; }
-    
-        public virtual Committee Committee { get; set; }
-        public virtual Employee Employee { get; set; }
+        Male = 0,
+        Female = 1
     }
 }

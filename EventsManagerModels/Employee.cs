@@ -19,6 +19,7 @@ namespace EventsManagerModels
         {
             this.Members = new HashSet<Member>();
             this.FounderAwards = new HashSet<FounderAward>();
+            this.BabyBirths = new HashSet<BabyBirth>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace EventsManagerModels
         public virtual ICollection<Member> Members { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FounderAward> FounderAwards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BabyBirth> BabyBirths { get; set; }
     }
 }

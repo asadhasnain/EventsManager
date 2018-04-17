@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BabyBirthsController.cs" />
     <Compile Include="Controllers\BudgetsController.cs" />
     <Compile Include="Controllers\CommitteesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -408,6 +409,11 @@
     <Content Include="Views\FounderAwards\Details.cshtml" />
     <Content Include="Views\FounderAwards\Edit.cshtml" />
     <Content Include="Views\FounderAwards\Index.cshtml" />
+    <Content Include="Views\BabyBirths\Create.cshtml" />
+    <Content Include="Views\BabyBirths\Delete.cshtml" />
+    <Content Include="Views\BabyBirths\Details.cshtml" />
+    <Content Include="Views\BabyBirths\Edit.cshtml" />
+    <Content Include="Views\BabyBirths\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
