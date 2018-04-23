@@ -4,217 +4,217 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DomainModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BabyBirths">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Gender" Type="int" Nullable="false" />
-          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Budgets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CommitteeID" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="real" Nullable="false" />
-          <Property Name="Year" Type="nchar" MaxLength="4" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Committees">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="Employees">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-          <Property Name="DateOfJoining" Type="datetime" Nullable="false" />
-          <Property Name="DateOfResignation" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Events">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="Schedule" Type="datetime" Nullable="false" />
-          <Property Name="CommitteeID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Expenses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="real" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="250" />
-          <Property Name="EventID" Type="int" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FounderAwards">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeId" Type="int" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Lunch">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Week" Type="int" Nullable="false" />
-          <Property Name="Day" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Deal" Type="nvarchar" MaxLength="250" />
-          <Property Name="SideLine" Type="nvarchar" MaxLength="250" />
-          <Property Name="Misc" Type="nvarchar" MaxLength="250" />
-          <Property Name="Sweet" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="Members">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
-          <Property Name="CommitteeID" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_BabyBirth_ToEmployee">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="BabyBirths" Type="Self.BabyBirths" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BabyBirths">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Budget_ToCommittee">
-          <End Role="Committees" Type="Self.Committees" Multiplicity="1" />
-          <End Role="Budgets" Type="Self.Budgets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Committees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Budgets">
-              <PropertyRef Name="CommitteeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employee_FounderAwards">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="FounderAwards" Type="Self.FounderAwards" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FounderAwards">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Evemt_ToCommittee">
-          <End Role="Committees" Type="Self.Committees" Multiplicity="1" />
-          <End Role="Events" Type="Self.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Committees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="CommitteeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Expense_ToEvent">
-          <End Role="Events" Type="Self.Events" Multiplicity="1" />
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Events">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Expenses">
-              <PropertyRef Name="EventID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Member_ToCommittee">
-          <End Role="Committees" Type="Self.Committees" Multiplicity="1" />
-          <End Role="Members" Type="Self.Members" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Committees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Members">
-              <PropertyRef Name="CommitteeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Member_ToEmployee">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="Members" Type="Self.Members" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Members">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="DomainModelsStoreContainer">
-          <EntitySet Name="BabyBirths" EntityType="Self.BabyBirths" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Budgets" EntityType="Self.Budgets" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Committees" EntityType="Self.Committees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FounderAwards" EntityType="Self.FounderAwards" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lunch" EntityType="Self.Lunch" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BabyBirth_ToEmployee" Association="Self.FK_BabyBirth_ToEmployee">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="BabyBirths" EntitySet="BabyBirths" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Budget_ToCommittee" Association="Self.FK_Budget_ToCommittee">
-            <End Role="Committees" EntitySet="Committees" />
-            <End Role="Budgets" EntitySet="Budgets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_FounderAwards" Association="Self.FK_Employee_FounderAwards">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="FounderAwards" EntitySet="FounderAwards" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Evemt_ToCommittee" Association="Self.FK_Evemt_ToCommittee">
-            <End Role="Committees" EntitySet="Committees" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Expense_ToEvent" Association="Self.FK_Expense_ToEvent">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="Expenses" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Member_ToCommittee" Association="Self.FK_Member_ToCommittee">
-            <End Role="Committees" EntitySet="Committees" />
-            <End Role="Members" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Member_ToEmployee" Association="Self.FK_Member_ToEmployee">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Members" EntitySet="Members" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="DomainModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DomainModelsStoreContainer">
+    <EntitySet Name="Budgets" EntityType="DomainModels.Store.Budgets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Committees" EntityType="DomainModels.Store.Committees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="DomainModels.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="DomainModels.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Members" EntityType="DomainModels.Store.Members" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FounderAwards" EntityType="DomainModels.Store.FounderAwards" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BabyBirths" EntityType="DomainModels.Store.BabyBirths" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Expenses" EntityType="DomainModels.Store.Expenses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lunches" EntityType="DomainModels.Store.Lunches" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Budget_ToCommittee" Association="DomainModels.Store.FK_Budget_ToCommittee">
+      <End Role="Committee" EntitySet="Committees" />
+      <End Role="Budget" EntitySet="Budgets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evemt_ToCommittee" Association="DomainModels.Store.FK_Evemt_ToCommittee">
+      <End Role="Committee" EntitySet="Committees" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_ToCommittee" Association="DomainModels.Store.FK_Member_ToCommittee">
+      <End Role="Committee" EntitySet="Committees" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_ToEmployee" Association="DomainModels.Store.FK_Member_ToEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_FounderAwards" Association="DomainModels.Store.FK_Employee_FounderAwards">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="FounderAward" EntitySet="FounderAwards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BabyBirth_ToEmployee" Association="DomainModels.Store.FK_BabyBirth_ToEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="BabyBirth" EntitySet="BabyBirths" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_ToEvent" Association="DomainModels.Store.FK_Expense_ToEvent">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Expense" EntitySet="Expenses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Budgets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommitteeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="real" Nullable="false" />
+    <Property Name="Year" Type="nchar" Nullable="false" MaxLength="4" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Committees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="DateOfJoining" Type="datetime" Nullable="false" />
+    <Property Name="DateOfResignation" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="500" />
+    <Property Name="Schedule" Type="datetime" Nullable="false" />
+    <Property Name="CommitteeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="CommitteeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FounderAwards">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BabyBirths">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Expenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="real" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="EventID" Type="int" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lunches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Week" Type="int" Nullable="false" />
+    <Property Name="Day" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="Deal" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="SideLine" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="Misc" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="Sweet" Type="nvarchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <Association Name="FK_Budget_ToCommittee">
+    <End Role="Committee" Type="DomainModels.Store.Committees" Multiplicity="1" />
+    <End Role="Budget" Type="DomainModels.Store.Budgets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="CommitteeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evemt_ToCommittee">
+    <End Role="Committee" Type="DomainModels.Store.Committees" Multiplicity="1" />
+    <End Role="Event" Type="DomainModels.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="CommitteeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_ToCommittee">
+    <End Role="Committee" Type="DomainModels.Store.Committees" Multiplicity="1" />
+    <End Role="Member" Type="DomainModels.Store.Members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="CommitteeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_ToEmployee">
+    <End Role="Employee" Type="DomainModels.Store.Employees" Multiplicity="1" />
+    <End Role="Member" Type="DomainModels.Store.Members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_FounderAwards">
+    <End Role="Employee" Type="DomainModels.Store.Employees" Multiplicity="1" />
+    <End Role="FounderAward" Type="DomainModels.Store.FounderAwards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FounderAward">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BabyBirth_ToEmployee">
+    <End Role="Employee" Type="DomainModels.Store.Employees" Multiplicity="1" />
+    <End Role="BabyBirth" Type="DomainModels.Store.BabyBirths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BabyBirth">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_ToEvent">
+    <End Role="Event" Type="DomainModels.Store.Events" Multiplicity="1" />
+    <End Role="Expense" Type="DomainModels.Store.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DomainModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -533,19 +533,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="Lunches">
-            <EntityTypeMapping TypeName="DomainModels.Lunch">
-              <MappingFragment StoreEntitySet="Lunch">
-                <ScalarProperty Name="Sweet" ColumnName="Sweet" />
-                <ScalarProperty Name="Misc" ColumnName="Misc" />
-                <ScalarProperty Name="SideLine" ColumnName="SideLine" />
-                <ScalarProperty Name="Deal" ColumnName="Deal" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="Week" ColumnName="Week" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+    <EntitySetMapping Name="Lunches">
+      <EntityTypeMapping TypeName="IsTypeOf(DomainModels.Lunch)">
+        <MappingFragment StoreEntitySet="Lunches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Deal" ColumnName="Deal" />
+          <ScalarProperty Name="SideLine" ColumnName="SideLine" />
+          <ScalarProperty Name="Misc" ColumnName="Misc" />
+          <ScalarProperty Name="Sweet" ColumnName="Sweet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
