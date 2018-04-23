@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Lunch]
+(
+	[Id] INT IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
+    [Week] INT NOT NULL, 
+    [Day] NVARCHAR(50) NOT NULL, 
+    [Deal] NVARCHAR(50) NOT NULL, 
+    [SideLine] NVARCHAR(50) NOT NULL, 
+    [Misc] NVARCHAR(50) NOT NULL, 
+    [Sweet] NVARCHAR(50) NOT NULL
+)
