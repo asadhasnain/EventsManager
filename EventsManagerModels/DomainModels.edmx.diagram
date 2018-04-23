@@ -20,6 +20,7 @@
         <AssociationConnector Association="DomainModels.FK_BabyBirth_ToEmployee" />
         <EntityTypeShape EntityType="DomainModels.Expense" Width="1.5" PointX="5.25" PointY="7.375" />
         <AssociationConnector Association="DomainModels.FK_Expense_ToEvent" />
+        <EntityTypeShape EntityType="DomainModels.Lunch" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -85,6 +85,9 @@
     <Compile Include="Gender.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Lunch.cs">
+      <DependentUpon>DomainModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Member.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
@@ -110,7 +113,6 @@
       <DependentUpon>DomainModels.edmx</DependentUpon>
       <LastGenOutput>DomainModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DomainModels.edmx.sql" />
     <Content Include="DomainModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DomainModels.edmx</DependentUpon>
