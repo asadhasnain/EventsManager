@@ -21,6 +21,8 @@
         <EntityTypeShape EntityType="DomainModels.Expense" Width="1.5" PointX="5.25" PointY="7.375" />
         <AssociationConnector Association="DomainModels.FK_Expense_ToEvent" />
         <EntityTypeShape EntityType="DomainModels.Lunch" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DomainModels.Marriage" Width="1.5" PointX="6" PointY="14.375" />
+        <AssociationConnector Association="DomainModels.FK_Marriage_ToEmployee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

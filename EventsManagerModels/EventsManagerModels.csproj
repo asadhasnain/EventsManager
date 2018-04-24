@@ -93,6 +93,9 @@
     <Compile Include="Lunch.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Marriage.cs">
+      <DependentUpon>DomainModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Member.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>

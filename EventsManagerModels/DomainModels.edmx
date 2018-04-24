@@ -15,6 +15,7 @@
     <EntitySet Name="BabyBirths" EntityType="DomainModels.Store.BabyBirths" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Expenses" EntityType="DomainModels.Store.Expenses" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Lunches" EntityType="DomainModels.Store.Lunches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Marriages" EntityType="DomainModels.Store.Marriages" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_Budget_ToCommittee" Association="DomainModels.Store.FK_Budget_ToCommittee">
       <End Role="Committee" EntitySet="Committees" />
       <End Role="Budget" EntitySet="Budgets" />
@@ -42,6 +43,10 @@
     <AssociationSet Name="FK_Expense_ToEvent" Association="DomainModels.Store.FK_Expense_ToEvent">
       <End Role="Event" EntitySet="Events" />
       <End Role="Expense" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marriage_ToEmployee" Association="DomainModels.Store.FK_Marriage_ToEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Marriage" EntitySet="Marriages" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Budgets">
@@ -130,6 +135,14 @@
     <Property Name="Misc" Type="nvarchar" Nullable="true" MaxLength="250" />
     <Property Name="Sweet" Type="nvarchar" Nullable="true" MaxLength="250" />
   </EntityType>
+  <EntityType Name="Marriages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="DateOfMarriage" Type="datetime" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Budget_ToCommittee">
     <End Role="Committee" Type="DomainModels.Store.Committees" Multiplicity="1" />
     <End Role="Budget" Type="DomainModels.Store.Budgets" Multiplicity="*" />
@@ -214,6 +227,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Marriage_ToEmployee">
+    <End Role="Employee" Type="DomainModels.Store.Employees" Multiplicity="1" />
+    <End Role="Marriage" Type="DomainModels.Store.Marriages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Marriage">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -253,6 +278,7 @@
           <NavigationProperty Name="Members" Relationship="Self.FK_Member_ToEmployee" FromRole="Employee" ToRole="Member" />
           <NavigationProperty Name="FounderAwards" Relationship="DomainModels.FK_Employee_FounderAwards" FromRole="Employee" ToRole="FounderAward" />
           <NavigationProperty Name="BabyBirths" Relationship="DomainModels.FK_BabyBirth_ToEmployee" FromRole="Employee" ToRole="BabyBirth" />
+          <NavigationProperty Name="Marriages" Relationship="DomainModels.FK_Marriage_ToEmployee" FromRole="Employee" ToRole="Marriage" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -362,6 +388,11 @@
             <End Role="Expense" EntitySet="Expenses" />
           </AssociationSet>
           <EntitySet Name="Lunches" EntityType="DomainModels.Lunch" />
+          <EntitySet Name="Marriages" EntityType="DomainModels.Marriage" />
+          <AssociationSet Name="FK_Marriage_ToEmployee" Association="DomainModels.FK_Marriage_ToEmployee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Marriage" EntitySet="Marriages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="FounderAward">
           <Key>
@@ -445,6 +476,27 @@
           <Property Name="Misc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Sweet" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Marriage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="DateOfMarriage" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="DomainModels.FK_Marriage_ToEmployee" FromRole="Marriage" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Marriage_ToEmployee">
+          <End Type="DomainModels.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DomainModels.Marriage" Role="Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Marriage">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -543,6 +595,15 @@
           <ScalarProperty Name="SideLine" ColumnName="SideLine" />
           <ScalarProperty Name="Misc" ColumnName="Misc" />
           <ScalarProperty Name="Sweet" ColumnName="Sweet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marriages">
+      <EntityTypeMapping TypeName="IsTypeOf(DomainModels.Marriage)">
+        <MappingFragment StoreEntitySet="Marriages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="DateOfMarriage" ColumnName="DateOfMarriage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

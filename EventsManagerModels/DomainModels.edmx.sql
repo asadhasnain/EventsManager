@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/23/2018 19:51:47
--- Generated from EDMX file: D:\SIG Bentley Technology Champions\ASP.NET MVC\EventsManager\EventsManagerModels\DomainModels.edmx
+-- Date Created: 04/24/2018 14:27:16
+-- Generated from EDMX file: E:\ProgrammingProjects\EventsManager\EventsManagerModels\DomainModels.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -31,6 +31,9 @@ IF OBJECT_ID(N'[dbo].[FK_Evemt_ToCommittee]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Expense_ToEvent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Expenses] DROP CONSTRAINT [FK_Expense_ToEvent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Marriage_ToEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Marriage] DROP CONSTRAINT [FK_Marriage_ToEmployee];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Member_ToCommittee]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Members] DROP CONSTRAINT [FK_Member_ToCommittee];
@@ -64,8 +67,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FounderAwards]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FounderAwards];
 GO
-IF OBJECT_ID(N'[dbo].[Lunch]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Lunch];
+IF OBJECT_ID(N'[dbo].[Lunches]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Lunches];
+GO
+IF OBJECT_ID(N'[dbo].[Marriage]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Marriage];
 GO
 IF OBJECT_ID(N'[dbo].[Members]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Members];
@@ -161,6 +167,14 @@ CREATE TABLE [dbo].[Lunches] (
 );
 GO
 
+-- Creating table 'Marriages'
+CREATE TABLE [dbo].[Marriages] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [EmployeeID] int  NOT NULL,
+    [DateOfMarriage] datetime  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -216,6 +230,12 @@ GO
 -- Creating primary key on [Id] in table 'Lunches'
 ALTER TABLE [dbo].[Lunches]
 ADD CONSTRAINT [PK_Lunches]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Marriages'
+ALTER TABLE [dbo].[Marriages]
+ADD CONSTRAINT [PK_Marriages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -326,6 +346,21 @@ GO
 CREATE INDEX [IX_FK_Expense_ToEvent]
 ON [dbo].[Expenses]
     ([EventID]);
+GO
+
+-- Creating foreign key on [EmployeeID] in table 'Marriages'
+ALTER TABLE [dbo].[Marriages]
+ADD CONSTRAINT [FK_Marriage_ToEmployee]
+    FOREIGN KEY ([EmployeeID])
+    REFERENCES [dbo].[Employees]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Marriage_ToEmployee'
+CREATE INDEX [IX_FK_Marriage_ToEmployee]
+ON [dbo].[Marriages]
+    ([EmployeeID]);
 GO
 
 -- --------------------------------------------------
