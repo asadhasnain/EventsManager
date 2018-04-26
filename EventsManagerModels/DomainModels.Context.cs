@@ -13,9 +13,9 @@ namespace EventsManagerModels
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BeEventsConnectionString : DbContext
+    public partial class DomainModels : DbContext
     {
-        public BeEventsConnectionString()
+        public DomainModels()
             : base("name=BeEventsConnectionString")
         {
         }

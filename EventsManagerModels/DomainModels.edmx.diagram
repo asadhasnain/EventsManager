@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7d45234c4bb24f75ba7208bea2e9490a" Name="Diagram1">
-        <EntityTypeShape EntityType="DomainModels.Budget" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DomainModels.Committee" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DomainModels.Employee" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DomainModels.Event" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DomainModels.Member" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <AssociationConnector Association="DomainModels.FK_Budget_ToCommittee" ManuallyRouted="false" />
-        <AssociationConnector Association="DomainModels.FK_Evemt_ToCommittee" ManuallyRouted="false" />
-        <AssociationConnector Association="DomainModels.FK_Member_ToCommittee" ManuallyRouted="false" />
-        <AssociationConnector Association="DomainModels.FK_Member_ToEmployee" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DomainModels.FounderAward" Width="1.5" PointX="6" PointY="1.125" />
+        <EntityTypeShape EntityType="DomainModels.Budget" PointX="3" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DomainModels.Committee" PointX="0.75" PointY="2.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DomainModels.Employee" PointX="0.75" PointY="6.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DomainModels.Event" PointX="3" PointY="15.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DomainModels.Member" PointX="3" PointY="6.75" Width="1.5" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="DomainModels.FK_Budget_ToCommittee" />
+        <AssociationConnector ManuallyRouted="false" Association="DomainModels.FK_Evemt_ToCommittee" />
+        <AssociationConnector ManuallyRouted="false" Association="DomainModels.FK_Member_ToCommittee" />
+        <AssociationConnector ManuallyRouted="false" Association="DomainModels.FK_Member_ToEmployee" />
+        <EntityTypeShape EntityType="DomainModels.FounderAward" PointX="3" PointY="4.25" Width="1.5" />
         <AssociationConnector Association="DomainModels.FK_Employee_FounderAwards" />
-        <EntityTypeShape EntityType="DomainModels.BabyBirth" Width="1.5" PointX="6" PointY="11.125" />
+        <EntityTypeShape EntityType="DomainModels.BabyBirth" PointX="3" PointY="9.5" Width="1.5" />
         <AssociationConnector Association="DomainModels.FK_BabyBirth_ToEmployee" />
-        <EntityTypeShape EntityType="DomainModels.Expense" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="DomainModels.Expense" PointX="5.25" PointY="15.75" Width="1.5" />
         <AssociationConnector Association="DomainModels.FK_Expense_ToEvent" />
-        <EntityTypeShape EntityType="DomainModels.Lunch" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DomainModels.Marriage" Width="1.5" PointX="6" PointY="14.375" />
+        <EntityTypeShape EntityType="DomainModels.Lunch" PointX="5.75" PointY="2.25" Width="1.5" />
+        <EntityTypeShape EntityType="DomainModels.Marriage" Width="1.5" PointX="3" PointY="12.875" />
         <AssociationConnector Association="DomainModels.FK_Marriage_ToEmployee" />
       </Diagram>
     </edmx:Diagrams>

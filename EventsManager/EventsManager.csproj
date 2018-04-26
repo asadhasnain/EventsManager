@@ -205,6 +205,7 @@
     <Compile Include="Controllers\FounderAwardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MarriagesController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -414,6 +415,11 @@
     <Content Include="Views\BabyBirths\Details.cshtml" />
     <Content Include="Views\BabyBirths\Edit.cshtml" />
     <Content Include="Views\BabyBirths\Index.cshtml" />
+    <Content Include="Views\Marriages\Create.cshtml" />
+    <Content Include="Views\Marriages\Delete.cshtml" />
+    <Content Include="Views\Marriages\Details.cshtml" />
+    <Content Include="Views\Marriages\Edit.cshtml" />
+    <Content Include="Views\Marriages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

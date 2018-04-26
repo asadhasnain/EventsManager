@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/24/2018 14:27:16
+-- Date Created: 04/25/2018 19:26:22
 -- Generated from EDMX file: E:\ProgrammingProjects\EventsManager\EventsManagerModels\DomainModels.edmx
 -- --------------------------------------------------
 
@@ -33,7 +33,7 @@ IF OBJECT_ID(N'[dbo].[FK_Expense_ToEvent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Expenses] DROP CONSTRAINT [FK_Expense_ToEvent];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Marriage_ToEmployee]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Marriage] DROP CONSTRAINT [FK_Marriage_ToEmployee];
+    ALTER TABLE [dbo].[Marriages] DROP CONSTRAINT [FK_Marriage_ToEmployee];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Member_ToCommittee]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Members] DROP CONSTRAINT [FK_Member_ToCommittee];
@@ -70,8 +70,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Lunches]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Lunches];
 GO
-IF OBJECT_ID(N'[dbo].[Marriage]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Marriage];
+IF OBJECT_ID(N'[dbo].[Marriages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Marriages];
 GO
 IF OBJECT_ID(N'[dbo].[Members]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Members];
