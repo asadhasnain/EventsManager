@@ -15,14 +15,15 @@ namespace EventsManager
 
             routes.MapRoute (
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{controller}/{action}/{id}/{eventId}",
                 defaults: new
                     {
                     controller = "Events",
                     action = "Index",
-                    id = UrlParameter.Optional
+                    id = UrlParameter.Optional,
+					eventId = UrlParameter.Optional
                     }
             );
-            }
+			}
         }
     }

@@ -99,6 +99,28 @@
           <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="CommitteeID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberOfGuests" Type="int" />
+          <Property Name="Paid" Type="bit" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Contribution" Type="int" />
+          <Property Name="GuestContribution" Type="int" />
+          <Property Name="AllowGuest" Type="bit" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_BabyBirth_ToEmployee">
           <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="BabyBirths" Type="Self.BabyBirths" Multiplicity="*" />
@@ -195,6 +217,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Registration_ToEmployee">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_ToEvent">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_ToEvent">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="Schedules" Type="Self.Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DomainModelsStoreContainer">
           <EntitySet Name="BabyBirths" EntityType="Self.BabyBirths" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Budgets" EntityType="Self.Budgets" Schema="dbo" store:Type="Tables" />
@@ -206,6 +264,8 @@
           <EntitySet Name="Lunches" EntityType="Self.Lunches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marriages" EntityType="Self.Marriages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registrations" EntityType="Self.Registrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedules" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BabyBirth_ToEmployee" Association="Self.FK_BabyBirth_ToEmployee">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="BabyBirths" EntitySet="BabyBirths" />
@@ -237,6 +297,18 @@
           <AssociationSet Name="FK_Member_ToEmployee" Association="Self.FK_Member_ToEmployee">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_ToEmployee" Association="Self.FK_Registration_ToEmployee">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_ToEvent" Association="Self.FK_Registration_ToEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_ToEvent" Association="Self.FK_Schedule_ToEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Schedules" EntitySet="Schedules" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -279,6 +351,7 @@
           <NavigationProperty Name="FounderAwards" Relationship="DomainModels.FK_Employee_FounderAwards" FromRole="Employee" ToRole="FounderAward" />
           <NavigationProperty Name="BabyBirths" Relationship="DomainModels.FK_BabyBirth_ToEmployee" FromRole="Employee" ToRole="BabyBirth" />
           <NavigationProperty Name="Marriages" Relationship="DomainModels.FK_Marriage_ToEmployee" FromRole="Employee" ToRole="Marriage" />
+          <NavigationProperty Name="Registrations" Relationship="DomainModels.FK_Registration_ToEmployee" FromRole="Employee" ToRole="Registration" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -291,6 +364,8 @@
           <Property Name="CommitteeID" Nullable="false" Type="Int32" />
           <NavigationProperty Name="Committee" Relationship="Self.FK_Evemt_ToCommittee" FromRole="Event" ToRole="Committee" />
           <NavigationProperty Name="Expenses" Relationship="DomainModels.FK_Expense_ToEvent" FromRole="Event" ToRole="Expense" />
+          <NavigationProperty Name="Registrations" Relationship="DomainModels.FK_Registration_ToEvent" FromRole="Event" ToRole="Registration" />
+          <NavigationProperty Name="Schedules" Relationship="DomainModels.FK_Schedule_ToEvent" FromRole="Event" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -393,6 +468,20 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Marriage" EntitySet="Marriages" />
           </AssociationSet>
+          <EntitySet Name="Registrations" EntityType="DomainModels.Registration" />
+          <EntitySet Name="Schedules" EntityType="DomainModels.Schedule" />
+          <AssociationSet Name="FK_Registration_ToEmployee" Association="DomainModels.FK_Registration_ToEmployee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_ToEvent" Association="DomainModels.FK_Registration_ToEvent">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_ToEvent" Association="DomainModels.FK_Schedule_ToEvent">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="FounderAward">
           <Key>
@@ -494,6 +583,67 @@
             </Principal>
             <Dependent Role="Marriage">
               <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberOfGuests" Type="Int32" />
+          <Property Name="Paid" Type="Boolean" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DomainModels.FK_Registration_ToEmployee" FromRole="Registration" ToRole="Employee" />
+          <NavigationProperty Name="Event" Relationship="DomainModels.FK_Registration_ToEvent" FromRole="Registration" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Contribution" Type="Int32" />
+          <Property Name="GuestContribution" Type="Int32" />
+          <Property Name="AllowGuest" Type="Boolean" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="DomainModels.FK_Schedule_ToEvent" FromRole="Schedule" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_Registration_ToEmployee">
+          <End Type="DomainModels.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DomainModels.Registration" Role="Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_ToEvent">
+          <End Type="DomainModels.Event" Role="Event" Multiplicity="1" />
+          <End Type="DomainModels.Registration" Role="Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_ToEvent">
+          <End Type="DomainModels.Event" Role="Event" Multiplicity="1" />
+          <End Type="DomainModels.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="EventID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -603,6 +753,30 @@
               <MappingFragment StoreEntitySet="Marriages">
                 <ScalarProperty Name="DateOfMarriage" ColumnName="DateOfMarriage" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="DomainModels.Registration">
+              <MappingFragment StoreEntitySet="Registrations">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="NumberOfGuests" ColumnName="NumberOfGuests" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="DomainModels.Schedule">
+              <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="AllowGuest" ColumnName="AllowGuest" />
+                <ScalarProperty Name="GuestContribution" ColumnName="GuestContribution" />
+                <ScalarProperty Name="Contribution" ColumnName="Contribution" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

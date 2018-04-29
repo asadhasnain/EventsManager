@@ -23,6 +23,11 @@
         <EntityTypeShape EntityType="DomainModels.Lunch" PointX="5.75" PointY="2.25" Width="1.5" />
         <EntityTypeShape EntityType="DomainModels.Marriage" Width="1.5" PointX="3" PointY="12.875" />
         <AssociationConnector Association="DomainModels.FK_Marriage_ToEmployee" />
+        <EntityTypeShape EntityType="DomainModels.Registration" Width="1.5" PointX="5.25" PointY="11.25" />
+        <EntityTypeShape EntityType="DomainModels.Schedule" Width="1.5" PointX="5.25" PointY="18.875" />
+        <AssociationConnector Association="DomainModels.FK_Registration_ToEmployee" />
+        <AssociationConnector Association="DomainModels.FK_Registration_ToEvent" />
+        <AssociationConnector Association="DomainModels.FK_Schedule_ToEvent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
