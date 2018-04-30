@@ -209,6 +209,7 @@
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\RegistrationsController.cs" />
     <Compile Include="Controllers\SchedulesController.cs" />
+    <Compile Include="CustomClasses\EmailHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
