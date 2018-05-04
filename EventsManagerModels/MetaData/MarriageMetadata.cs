@@ -11,12 +11,12 @@ namespace EventsManagerModels.MetaData
     class MarriageMetadata
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="Please select required user name")]
+        [Required(ErrorMessage ="Please select colleague name")]
         [Display(Name ="Employee Id")]
         public int EmployeeID { get; set; }
-        [Required(ErrorMessage ="Please Enter Employee Marriage Date")]
+        [Required(ErrorMessage = "Please enter employee's date of marriage")]
         [Display(Name ="Marriage Date")]
-        [DataType(DataType.Date,ErrorMessage ="It's not a date, please see the format")]
+        [DataType(DataType.Date,ErrorMessage = "Please specify the date in correct format MM/dd/yyyy")]
         public System.DateTime DateOfMarriage { get; set; }
 
         public virtual Employee Employee { get; set; }

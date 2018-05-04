@@ -9,24 +9,24 @@ namespace EventsManagerModels.MetaData
 {
     class EmployeeMetadata
     {
-        [Required(ErrorMessage ="User Name must required")]
-        [Display(Name="User Name")]
-        [StringLength(maximumLength:60,MinimumLength =2, ErrorMessage ="User name must be in the range of 2 to 50 characters")]
+        [Required(ErrorMessage = "Colleague name is required")]
+        [Display(Name="Colleague Name")]
+        [StringLength(maximumLength:100,MinimumLength =2, ErrorMessage ="Colleague name must be in the range of 2-100 characters")]
         public string Name { get; set; }
-        [Required(ErrorMessage ="Email must required")]
+        [Required(ErrorMessage ="Email is required")]
         [Display(Name="Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Please Enter The Birth Date")]
+        [Required(ErrorMessage = "Please enter the date of birth")]
         [Display(Name = "Birth Date")]
-        [DataType(DataType.Date, ErrorMessage = "It's not a date, please see the format")]
+        [DataType(DataType.Date, ErrorMessage = "Please specify the date in correct format MM/dd/yyyy")]
         public System.DateTime DateOfBirth { get; set; }
-        [Required(ErrorMessage = "Please Enter the Joining Date")]
+        [Required(ErrorMessage = "Please enter the date of joining")]
         [Display(Name = "Joining Date")]
-        [DataType(DataType.Date, ErrorMessage = "It's not a date, please see the format")]
+        [DataType(DataType.Date, ErrorMessage = "Please specify the date in correct format MM/dd/yyyy")]
         public System.DateTime DateOfJoining { get; set; }
-        [Display(Name = "Email")]
-        [DataType(DataType.Date, ErrorMessage = "It's not a date, please see the format")]
+        [Display(Name = "Resignation Date")]
+        [DataType(DataType.Date, ErrorMessage = "Please specify the date in correct format MM/dd/yyyy")]
         public Nullable<System.DateTime> DateOfResignation { get; set; }
 
     }
