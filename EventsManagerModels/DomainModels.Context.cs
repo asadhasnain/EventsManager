@@ -35,5 +35,7 @@ namespace EventsManagerModels
         public virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Lunch> Lunches { get; set; }
         public virtual DbSet<Marriage> Marriages { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
     }
 }

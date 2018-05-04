@@ -102,6 +102,12 @@
     <Compile Include="MetaData\EmployeeMetadata.cs" />
     <Compile Include="MetaData\MarriageMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration.cs">
+      <DependentUpon>DomainModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Schedule.cs">
+      <DependentUpon>DomainModels.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
