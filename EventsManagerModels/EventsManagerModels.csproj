@@ -99,6 +99,8 @@
     <Compile Include="Member.cs">
       <DependentUpon>DomainModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="MetaData\EmployeeMetadata.cs" />
+    <Compile Include="MetaData\MarriageMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfMarriage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateOfMarriage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DateOfMarriage, "{0:dMM/dd/yyyy}", new { @id = "datepickerDoM", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.DateOfMarriage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,5 +46,20 @@
 </div>
 
 @section Scripts {
+    @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+
+        $("#datepickerDoM").each(function () {
+            $(this).datepicker(
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:' + new Date().getFullYear()
+                }
+            ); //Initialise any date pickers
+        });
+    </script>
 }

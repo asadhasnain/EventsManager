@@ -9,9 +9,12 @@
 
 namespace EventsManagerModels
 {
+    using MetaData;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(MarriageMetadata))]
     public partial class Marriage
     {
         public int Id { get; set; }
