@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.TextBoxFor(model => model.StartDate, "{0:MM/dd/yyyy HH:mm}", new { @id = "datepickerSD", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.EndDate, "{0:MM/dd/yyyy HH:mm}", new { @id = "datepickerED", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input name="Update" type="submit" value="Update" class="btn btn-default" />
-				<input name="Update" type="submit" value="Update&SendEmail" class="btn btn-default" />
+				<input name="Update" type="submit" value="Update & Send Email" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -81,5 +81,21 @@
 </div>
 
 @section Scripts {
+    @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+
+        $("#datepickerSD,#datepickerED").each(function () {
+        	$(this).datetimepicker(
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:' + new Date().getFullYear(),
+                    datetimepicker: true
+                }
+            ); //Initialise any date pickers
+        });
+    </script>
 }

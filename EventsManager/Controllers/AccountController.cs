@@ -136,7 +136,8 @@ namespace EventsManager.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        //[Authorize]
+		[AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -145,8 +146,9 @@ namespace EventsManager.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+		[AllowAnonymous]
+		//[Authorize]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)

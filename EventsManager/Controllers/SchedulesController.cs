@@ -55,7 +55,7 @@ namespace EventsManager.Controllers
             {
                 db.Schedules.Add(schedule);
                 db.SaveChanges();
-				if (Create == "Create&SendEmail")
+				if (Create == "Create & Send Email")
 					{
 					string url = string.Format ("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content ("~"));
 					EmailHandler.GenerateEmails (schedule.Id,url);
@@ -94,7 +94,7 @@ namespace EventsManager.Controllers
             {
                 db.Entry(schedule).State = EntityState.Modified;
                 db.SaveChanges();
-				if (Update == "Update&SendEmail")
+				if (Update == "Update & Send Email")
 					{
 					schedule.Event = db.Events.Find (schedule.EventID);
 					string url = string.Format ("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content ("~"));
