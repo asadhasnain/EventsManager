@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\FounderAwardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LunchesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MarriagesController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -435,6 +436,11 @@
     <Content Include="Views\Schedules\Index.cshtml" />
     <Content Include="Views\Registrations\Register.cshtml" />
     <Content Include="Views\Registrations\Unregister.cshtml" />
+    <Content Include="Views\Lunches\Create.cshtml" />
+    <Content Include="Views\Lunches\Delete.cshtml" />
+    <Content Include="Views\Lunches\Details.cshtml" />
+    <Content Include="Views\Lunches\Edit.cshtml" />
+    <Content Include="Views\Lunches\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

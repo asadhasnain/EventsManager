@@ -80,9 +80,9 @@ namespace EventsManager.CustomClasses
 			smtpClient.Host = "smtp.live.com";
 			smtpClient.EnableSsl = true;
 			smtpClient.UseDefaultCredentials = false;
-			smtpClient.Credentials = new NetworkCredential ("bilal.farooq@bentley.com", password);
+			smtpClient.Credentials = new NetworkCredential ("asad.bukhari@bentley.com", password);
 
-			MailAddress from = new MailAddress ("bilal.farooq@bentley.com", "Bilal Farooq", System.Text.Encoding.UTF8);
+			MailAddress from = new MailAddress ("asad.bukhar@bentley.com", "Asad Bukhari", System.Text.Encoding.UTF8);
 			MailAddress to = new MailAddress ("be2bd648.bentley.onmicrosoft.com@amer.teams.ms");
 			MailMessage message = new MailMessage (from, to);
 
