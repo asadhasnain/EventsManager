@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Schedule, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Schedule, "{0:dMM/dd/yyyy}", new { @id = "datepickerEvent", @class = "form-control", placeholder = "MM/dd/yyyy" })
+                @Html.TextBoxFor(model => model.Schedule, "{0:MM/dd/yyyy HH:mm}", new { @id = "datepickerEvent", @class = "form-control", placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.Schedule, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,7 +67,7 @@
 <script type="text/javascript">
 
         $("#datepickerEvent").each(function () {
-            $(this).datepicker(
+            $(this).datetimepicker(
                 {
                     changeMonth: true,
                     changeYear: true,

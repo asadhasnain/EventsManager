@@ -50,30 +50,34 @@ namespace EventsManager.CustomClasses
 			DomainModels db = new DomainModels ();
 			Schedule schedule = db.Schedules.Find (scheduleId);
 			string eventTitle = schedule.Event.Title;
-			string eventDate = schedule.Event.Schedule.ToLongDateString ();
-			string eventTime = schedule.Event.Schedule.ToShortTimeString ();
+			string eventTimeDate = schedule.Event.Schedule.ToShortTimeString () + " " + schedule.Event.Schedule.ToLongDateString ();
+			//string eventTime = schedule.Event.Schedule.ToShortTimeString ();
 			string contribution = schedule.Contribution != null ? "Rs. " + schedule.Contribution : "";
 			string guestAllowed = schedule.AllowGuest ? "Yes" : "No";
 			string guestContribution = schedule.GuestContribution != null ? "Rs. " + schedule.GuestContribution : "";
 			string registrationStart = schedule.StartDate.ToShortTimeString() + " " + schedule.StartDate.ToLongDateString();
 			string registrationEnd = schedule.EndDate.ToShortTimeString () + " " + schedule.EndDate.ToLongDateString ();
-			;
+			string committee = schedule.Event.Committee.Title;
 
-			string eventInfo = String.Format ("Event Title {0,19} {1,40}"  +
-								"\nTime {0,26} {2,40}"  +
-								"\nDate {0,26} {3,40}"  +
-								"\nRegistration Start Time {0,7} {4,40}"  +
-								"\nRegistration End Time {0,9} {5,40}" , 
-								"--",
-								eventTitle, eventTime, eventDate, registrationStart, registrationEnd);
+			string emailBody = WebConfigurationManager.AppSettings["EmailTemplate"];
 
-			eventInfo = contribution != "" ? eventInfo +
-								String.Format("\nContribution {0,18} {1,40}","--" , contribution) : eventInfo;
+			emailBody = emailBody.Replace ("$Event$", eventTitle).Replace ("$Schedule$", eventTimeDate).Replace("$EndTime$",registrationEnd).Replace("$Committee$",committee);
 
-			eventInfo = guestAllowed == "Yes" ? eventInfo +
-								string.Format("\nGuest Allowed {0,17} {1,40}" +
-								"\nGuest Contribution {0,12} {2,40}" ,"--","Yes", guestContribution) : 
-								eventInfo + String.Format("\nGuest Allowed {0,17} {1,40}","--","No");
+			//string eventInfo = String.Format ("Event Title {0,19} {1,40}"  +
+			//					"\nTime {0,26} {2,40}"  +
+			//					"\nDate {0,26} {3,40}"  +
+			//					"\nRegistration Start Time {0,7} {4,40}"  +
+			//					"\nRegistration End Time {0,9} {5,40}" , 
+			//					"--",
+			//					eventTitle, eventTime, eventDate, registrationStart, registrationEnd);
+
+			//eventInfo = contribution != "" ? eventInfo +
+			//					String.Format("\nContribution {0,18} {1,40}","--" , contribution) : eventInfo;
+
+			//eventInfo = guestAllowed == "Yes" ? eventInfo +
+			//					string.Format("\nGuest Allowed {0,17} {1,40}" +
+			//					"\nGuest Contribution {0,12} {2,40}" ,"--","Yes", guestContribution) : 
+			//					eventInfo + String.Format("\nGuest Allowed {0,17} {1,40}","--","No");
 
 			SmtpClient smtpClient = new SmtpClient ();
 			smtpClient.Port = 587;
@@ -98,11 +102,13 @@ namespace EventsManager.CustomClasses
 				//message.To.Add (new MailAddress ("be2bd648.bentley.onmicrosoft.com@amer.teams.ms"));
 				//message.To.Add (new MailAddress (""));
 
-				message.Body = "Hi " + employee.Name + "\n\n"
-								+ eventInfo + "\n\n" +
-								"You can register for this event by visiting the following link any time during the registration period.\n" +
-								url + "\\Registrations\\Register\\" + employee.Id + "\\" + schedule.EventID +
-								"\n\n Regards,\n" + schedule.Event.Committee.Title +" Committee";
+				//message.Body = "Hi " + employee.Name + "\n\n"
+				//				+ eventInfo + "\n\n" +
+				//				"You can register for this event by visiting the following link any time during the registration period.\n" +
+				//				url + "\\Registrations\\Register\\" + employee.Id + "\\" + schedule.EventID +
+				//				"\n\n Regards,\n" + schedule.Event.Committee.Title +" Committee";
+
+				message.Body = emailBody.Replace ("$Colleague$", employee.Name).Replace ("$url$", url + "\\Registrations\\Register\\" + employee.Id + "\\" + schedule.EventID);
 
 				//string someArrows = new string(new char[] { '\u2190', '\u2191', '\u2192', '\u2193' });
 				//message.Body += Environment.NewLine + someArrows;
